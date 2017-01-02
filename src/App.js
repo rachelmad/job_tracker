@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import JobsOverview from "./components/JobsOverview";
 
 ReactDOM.render(
-  <div>Hello</div>,
+  <JobsOverview />,
   document.getElementById('main')
 );
