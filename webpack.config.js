@@ -1,8 +1,10 @@
 module.exports = {
   entry: "./src/App.js",
+  devtool: 'source-map',
   output: {
   	path: "./static",
-    filename: "bundle.js"
+    filename: "bundle.js",
+    sourceMapFilename: "bundle.js.map"
   },
   watch: true,
   module: {

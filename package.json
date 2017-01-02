@@ -20,8 +20,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --inline",
-    "build": "./node_modules/.bin/babel src --out-dir static --watch --presets=react,latest",
-    "prod": "webpack -p",
+    "build": "babel src --out-dir static --watch --presets=react,latest",
+    "prod": "webpack --progress -p",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
