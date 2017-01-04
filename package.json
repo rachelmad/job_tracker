@@ -14,6 +14,7 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
@@ -22,6 +23,7 @@
     "start": "webpack-dev-server --inline",
     "build": "babel src --out-dir static --watch --presets=react,latest",
     "prod": "webpack --progress -p",
+    "node": "node index.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

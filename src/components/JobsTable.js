@@ -9,8 +9,16 @@ export default class JobsTable extends React.Component {
 		}
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (this.props.jobs != this.state.jobs) {
+			this.setState({
+				jobs: this.props.jobs
+			})
+		}
+	}
+
 	render() {
-		const rows = this.props.jobs.map((job, index) => {
+		const rows = this.state.jobs.map((job, index) => {
 			return <JobRow key={index} jobData={job} />
 		});
 
@@ -24,9 +32,11 @@ export default class JobsTable extends React.Component {
 							<th>File Name</th>
 							<th>Pages</th>
 							<th>Rush</th>
-							<th>Returned</th>
-							<th>Paid</th>
+							<th>Date Returned</th>
+							<th>Invoice Number</th>
+							<th>Date Paid</th>
 							<th>Value</th>
+							<th>Notes</th>
 						</tr>
 					</thead>
 					<tbody>
