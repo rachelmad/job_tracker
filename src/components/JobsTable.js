@@ -18,8 +18,8 @@ export default class JobsTable extends React.Component {
 	}
 
 	render() {
-		const rows = this.state.jobs.map((job, index) => {
-			return <JobRow key={index} jobData={job} />
+		const rows = this.state.jobs.map((job) => {
+			return <JobRow key={job._id} jobData={job} />
 		});
 
 		return (
