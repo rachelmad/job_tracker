@@ -1,5 +1,6 @@
 import JobsTable from "./JobsTable";
 import NewJobForm from "./NewJobForm";
+import NewReporterForm from "./NewReporterForm";
 
 export default class JobsOverview extends React.Component {
 	constructor(props) {
@@ -11,6 +12,7 @@ export default class JobsOverview extends React.Component {
 
 		this.getJobs = this.getJobs.bind(this);
 		this.addJob = this.addJob.bind(this);
+		this.addReporter = this.addReporter.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
 	}
 
@@ -41,9 +43,9 @@ export default class JobsOverview extends React.Component {
 		});
 	}
 
-	// updateJobs(job) {
-	// 	console.log(job);
-	// }
+	addReporter(reporter) {
+		console.log("Adding reporter");
+	}
 
 	render() {
 		return (
@@ -51,6 +53,7 @@ export default class JobsOverview extends React.Component {
 				<p>This is the overview</p>
 				<JobsTable jobs={this.state.jobs} />
 				<NewJobForm addJob={this.addJob} />
+				<NewReporterForm addReporter={this.addReporter} />
 			</div>
 		);
 	}
