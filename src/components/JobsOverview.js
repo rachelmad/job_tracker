@@ -7,10 +7,12 @@ export default class JobsOverview extends React.Component {
 		super(props);
 
 		this.state = {
-			jobs: []
+			jobs: [],
+			reporters: []
 		}
 
 		this.getJobs = this.getJobs.bind(this);
+		this.getReporters = this.getReporters.bind(this);
 		this.addJob = this.addJob.bind(this);
 		this.addReporter = this.addReporter.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
@@ -18,12 +20,21 @@ export default class JobsOverview extends React.Component {
 
 	componentDidMount() {
 		this.getJobs();
+		this.getReporters();
 	}
 
 	getJobs() {
 		$.ajax('/api/jobs').done((data) => {
 			this.setState({
 				jobs: data
+			});
+		});
+	}
+
+	getReporters() {
+		$.ajax('/api/reporters').done((data) => {
+			this.setState({
+				reporters: data
 			});
 		});
 	}
@@ -44,7 +55,18 @@ export default class JobsOverview extends React.Component {
 	}
 
 	addReporter(reporter) {
-		console.log("Adding reporter");
+		$.ajax({
+			type: 'POST',
+			url: '/api/reporters',
+			contentType: 'application/json',
+			data: JSON.stringify(job),
+			success: (data) => {	
+				this.getReporters();
+			},
+			error: (xhr, status, err) => {
+				console.log("Error adding reporter: ", err);
+			} 
+		});
 	}
 
 	render() {
