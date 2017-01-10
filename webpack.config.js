@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/App.js",
+  entry: "./src/app/App.js",
   devtool: 'source-map',
   output: {
   	path: "./static",
