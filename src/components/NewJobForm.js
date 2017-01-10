@@ -20,6 +20,7 @@ export default class NewJobForm extends React.Component {
 			invoice: form.invoice.value,
 			datePaid: form.datePaid.value,
 			value: form.value.value,
+			status: form.status.value,
 			notes: form.notes.value
 		});
 	}
@@ -37,6 +38,12 @@ export default class NewJobForm extends React.Component {
 					<input type="text" name="invoice" placeholder="Invoice No." />
 					<input type="date" name="datePaid" placeholder="Date Paid" />
 					<input type="number" name="value" placeholder="Value" step="0.01"/>
+					<fieldset id="status">
+						<input type="radio" name="status" value="To-Do" />To-Do<br />
+						<input type="radio" name="status" value="Doing" />Doing<br />
+						<input type="radio" name="status" value="To-Invoice" />To-Invoice<br />
+						<input type="radio" name="status" value="Done" />Done<br />
+					</fieldset>
 					<input type="text" name="notes" placeholder="Notes" />
 					<button type="button" onClick={this.handleSubmit}>Add Job</button>
   				<input type="reset" />

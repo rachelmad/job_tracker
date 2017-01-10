@@ -36,6 +36,7 @@ export default class JobsTable extends React.Component {
 							<th>Invoice Number</th>
 							<th>Date Paid</th>
 							<th>Value</th>
+							<th>Status</th>
 							<th>Notes</th>
 						</tr>
 					</thead>

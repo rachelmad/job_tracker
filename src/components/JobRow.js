@@ -12,6 +12,7 @@ export default class JobRow extends React.Component {
 			invoice: this.props.jobData.invoice,
 			datePaid: this.props.jobData.datePaid,
 			value: this.props.jobData.value,
+			status: this.props.jobData.status,
 			notes: this.props.jobData.notes
 		}
 	}
@@ -28,6 +29,7 @@ export default class JobRow extends React.Component {
 				invoice: this.props.jobData.invoice,
 				datePaid: this.props.jobData.datePaid,
 				value: this.props.jobData.value,
+				status: this.props.jobData.status,
 				notes: this.props.jobData.notes
 			});
 		}
@@ -45,6 +47,7 @@ export default class JobRow extends React.Component {
 				<td>{this.state.invoice}</td>
 				<td>{this.state.datePaid}</td>
 				<td>{this.state.value}</td>
+				<td>{this.state.status}</td>
 				<td>{this.state.notes}</td>
 			</tr>
 		);
