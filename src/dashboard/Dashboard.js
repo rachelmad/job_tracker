@@ -1,3 +1,5 @@
+import ListContainer from "./ListContainer";
+
 export default class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
@@ -10,6 +12,7 @@ export default class Dashboard extends React.Component {
 		return (
 			<div>
 				<p>Dashboard</p>
+				<ListContainer />
 			</div>
 		);
 	}
