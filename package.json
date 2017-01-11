@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --inline",
-    "build": "babel src --out-dir static --watch --presets=react,latest",
+    "build": "webpack --progress -d",
     "prod": "webpack --progress -p",
     "node": "node index.js",
     "test": "react-scripts test --env=jsdom",

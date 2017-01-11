@@ -1,4 +1,4 @@
-import ListContainer from "./ListContainer";
+import Kanban from "./kanban/Kanban";
 
 export default class Dashboard extends React.Component {
 	constructor(props) {
@@ -12,7 +12,7 @@ export default class Dashboard extends React.Component {
 		return (
 			<div>
 				<p>Dashboard</p>
-				<ListContainer />
+				<Kanban />
 			</div>
 		);
 	}
