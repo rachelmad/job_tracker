@@ -41,7 +41,7 @@ export default class NewJobForm extends React.Component {
 					<fieldset id="status">
 						<input type="radio" name="status" value="To-Do" />To-Do<br />
 						<input type="radio" name="status" value="Doing" />Doing<br />
-						<input type="radio" name="status" value="To-Invoice" />To-Invoice<br />
+						<input type="radio" name="status" value="For-Invoice" />For-Invoice<br />
 						<input type="radio" name="status" value="Done" />Done<br />
 					</fieldset>
 					<input type="text" name="notes" placeholder="Notes" />

@@ -1,7 +1,11 @@
+import { Component } from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 import ListContainer from "./ListContainer";
 import styles from "../Dashboard.css";
 
-export default class Kanban extends React.Component {
+class Kanban extends Component {
   constructor(props) {
     super(props);
 
@@ -43,11 +47,13 @@ export default class Kanban extends React.Component {
   render() {
     return (
       <div className={styles.kanban}>
-        <ListContainer jobs={this.state.todo}/>
-        <ListContainer jobs={this.state.doing}/>
-        <ListContainer jobs={this.state.forinvoice}/>
-        <ListContainer jobs={this.state.done}/>
+        <ListContainer id="todo" jobs={this.state.todo}/>
+        <ListContainer id="doing" jobs={this.state.doing}/>
+        <ListContainer id="forinvoice" jobs={this.state.forinvoice}/>
+        <ListContainer id="done" jobs={this.state.done}/>
       </div>
     );
   }
 }
+
+export default DragDropContext(HTML5Backend)(Kanban);
