@@ -47,10 +47,10 @@ class Kanban extends Component {
   render() {
     return (
       <div className={styles.kanban}>
-        <ListContainer id="todo" jobs={this.state.todo}/>
-        <ListContainer id="doing" jobs={this.state.doing}/>
-        <ListContainer id="forinvoice" jobs={this.state.forinvoice}/>
-        <ListContainer id="done" jobs={this.state.done}/>
+        <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
+        <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
+        <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
+        <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
       </div>
     );
   }

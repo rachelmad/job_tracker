@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import MongoClient from 'mongodb';
+var ObjectId = require('mongodb').ObjectID;
 
 var app = express();
 var db;
@@ -31,6 +32,19 @@ app.use(bodyParser.json());
 app.post('/api/jobs', (req, res) => {
   addToCollection("jobs", req).then((result) => {
     res.json(result);
+  })
+});
+
+app.use(bodyParser.json());
+app.post('/api/jobStatus', (req, res) => {
+  db.collection("jobs").findOneAndUpdate(
+    { _id: ObjectId(req.body._id) },
+    { $set: 
+      { status: req.body.status }
+    },
+    { returnOriginal: false }
+  ).then((result) => {
+    res.json(result.value);
   })
 });
 

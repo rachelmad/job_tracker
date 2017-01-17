@@ -7,7 +7,11 @@ import { DragConstants } from '../../app/DragConstants';
 
 const containerTarget = {
   drop(props, monitor) {
-    console.log(monitor.getItem(), props.id);
+    var job = {
+      "_id": monitor.getItem().id, 
+      "status": props.id
+    }
+    moveJob(job, props.refresh);
   }
 }
 
@@ -16,6 +20,21 @@ function collect(connect, monitor) {
     connectDropTarget: connect.dropTarget(),
     item: monitor.getItem()
   }
+}
+
+function moveJob(job, refresh) {
+  $.ajax({
+    type: 'POST',
+    url: 'api/jobStatus',
+    contentType: 'application/json',
+    data: JSON.stringify(job),
+    success: (data) => {
+      refresh();
+    },
+    error: (xhr, status, err) => {
+      console.log("Error moving job: ", err);
+    }
+  })
 }
 
 class ListContainer extends Component {
