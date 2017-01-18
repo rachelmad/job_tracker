@@ -2,19 +2,19 @@ import { Component } from 'react';
 import Kanban from "./kanban/Kanban";
 
 export default class Dashboard extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-		}
-	}
+    this.state = {
+    }
+  }
 
-	render() {
-		return (
-			<div>
-				<p>Dashboard</p>
-				<Kanban />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <p>Dashboard</p>
+        <Kanban />
+      </div>
+    );
+  }
 }

@@ -4,6 +4,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import ListContainer from "./ListContainer";
 import styles from "../Dashboard.css";
+import NewJobForm from "./NewJobForm";
+import NewReporterForm from "./NewReporterForm";
 
 class Kanban extends Component {
   constructor(props) {
@@ -13,12 +15,18 @@ class Kanban extends Component {
       todo: [],
       doing: [],
       forinvoice: [],
-      done: []
+      done: [],
+      showJobForm: false,
+      showReporterForm: false
     }
 
     this.getJobs = this.getJobs.bind(this);
     this.sortJobs = this.sortJobs.bind(this);
     this.filterJobs = this.filterJobs.bind(this);
+    this.toggleJobArea = this.toggleJobArea.bind(this);
+    this.toggleReporterArea = this.toggleReporterArea.bind(this);
+    this.jobAdded = this.jobAdded.bind(this);
+    this.reporterAdded = this.reporterAdded.bind(this);
   }
 
   componentDidMount() {
@@ -44,13 +52,62 @@ class Kanban extends Component {
     return status.toLowerCase() === value.status.toLowerCase();
   }
 
+  toggleJobArea() {
+    this.setState({
+      showJobForm: !this.state.showJobForm
+    })
+  }
+
+  toggleReporterArea() {
+    this.setState({
+      showReporterForm: !this.state.showReporterForm
+    })
+  }
+
+  jobAdded() {
+    this.getJobs();
+    this.setState({
+      showJobForm: false
+    })
+  }
+
+  reporterAdded() {
+    console.log("Reporter added");
+    this.setState({
+      showReporterForm: false
+    })
+  }
+
   render() {
+    let buttonArea = null;
+    if (!this.state.showJobForm && !this.state.showReporterForm) {
+      buttonArea = <div>
+        <button type="button" onClick={this.toggleJobArea} >New Job</button>
+        <button type="button" onClick={this.toggleReporterArea} >New Reporter</button>
+      </div>
+    } 
+
+    let jobFormArea = null;
+    if (this.state.showJobForm) {
+      jobFormArea = <NewJobForm onSuccess={this.jobAdded} />
+    }
+
+    let reporterFormArea = null;
+    if (this.state.showReporterForm) {
+      reporterFormArea = <NewReporterForm onSuccess={this.reporterAdded} />
+    }
+
     return (
-      <div className={styles.kanban}>
-        <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
-        <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
-        <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
-        <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
+      <div>
+        { buttonArea }
+        { reporterFormArea }
+        { jobFormArea }
+        <div className={styles.kanban}>
+          <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
+          <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
+          <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
+          <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
+        </div>
       </div>
     );
   }

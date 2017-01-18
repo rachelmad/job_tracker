@@ -6,11 +6,12 @@ export default class NewJobForm extends React.Component {
 		}
 
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.addJob = this.addJob.bind(this);
 	}
 
 	handleSubmit() {
 		var form = document.forms.newJob;
-		this.props.addJob({
+		this.addJob({
 			dateReceived: form.dateReceived.value,
 			reporter: form.reporter.value,
 			fileName: form.fileName.value,
@@ -22,6 +23,21 @@ export default class NewJobForm extends React.Component {
 			value: form.value.value,
 			status: form.status.value,
 			notes: form.notes.value
+		});
+	}
+
+	addJob(job) {
+		$.ajax({
+			type: 'POST',
+			url: '/api/jobs',
+			contentType: 'application/json',
+			data: JSON.stringify(job),
+			success: (data) => {	
+				this.props.onSuccess();
+			},
+			error: (xhr, status, err) => {
+				console.log("Error adding job: ", err);
+			} 
 		});
 	}
 

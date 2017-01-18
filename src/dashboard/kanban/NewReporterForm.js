@@ -10,11 +10,26 @@ export default class NewReporterForm extends React.Component {
 
 	handleSubmit() {
 		var form = document.forms.newReporter;
-		this.props.addReporter({
+		this.addReporter({
 			name: form.name.value,
 			email: form.email.value,
 			paymentType: form.payment.value,
 			notes: form.notes.value
+		});
+	}
+
+	addReporter(reporter) {
+		$.ajax({
+			type: 'POST',
+			url: '/api/reporters',
+			contentType: 'application/json',
+			data: JSON.stringify(reporter),
+			success: (data) => {	
+				this.props.onSuccess();
+			},
+			error: (xhr, status, err) => {
+				console.log("Error adding reporter: ", err);
+			} 
 		});
 	}
 
