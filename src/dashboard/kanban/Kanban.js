@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import ListContainer from "./ListContainer";
 import styles from "../Dashboard.css";
@@ -27,6 +28,8 @@ class Kanban extends Component {
     this.toggleReporterArea = this.toggleReporterArea.bind(this);
     this.jobAdded = this.jobAdded.bind(this);
     this.reporterAdded = this.reporterAdded.bind(this);
+    this.closeJobForm = this.closeJobForm.bind(this);
+    this.closeReporterForm = this.closeReporterForm.bind(this);
   }
 
   componentDidMount() {
@@ -66,13 +69,21 @@ class Kanban extends Component {
 
   jobAdded() {
     this.getJobs();
+    this.closeJobForm();
+  }
+
+  reporterAdded() {
+    console.log("Reporter added");
+    this.closeReporterForm();
+  }
+
+  closeJobForm() {
     this.setState({
       showJobForm: false
     })
   }
 
-  reporterAdded() {
-    console.log("Reporter added");
+  closeReporterForm() {
     this.setState({
       showReporterForm: false
     })
@@ -89,12 +100,12 @@ class Kanban extends Component {
 
     let jobFormArea = null;
     if (this.state.showJobForm) {
-      jobFormArea = <NewJobForm onSuccess={this.jobAdded} />
+      jobFormArea = <NewJobForm onSuccess={this.jobAdded} onCancel={this.closeJobForm}/>
     }
 
     let reporterFormArea = null;
     if (this.state.showReporterForm) {
-      reporterFormArea = <NewReporterForm onSuccess={this.reporterAdded} />
+      reporterFormArea = <NewReporterForm onSuccess={this.reporterAdded} onCancel={this.closeReporterForm}/>
     }
 
     return (

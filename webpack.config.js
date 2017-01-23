@@ -10,25 +10,25 @@ module.exports = {
   },
   watch: true,
   module: {
-   loaders: [
-     {
-       test: [/\.js$/, /\.es6$/],
-       exclude: /node_modules/,
-       loader: 'babel-loader',
-       query: {
-         presets: ['react', 'es2015'] 
-       }
-     },
-     {
-       test: /\.css/,
-       loader: ExtractTextPlugin.extract('css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
-     }
-   ]
- },
- resolve: {
-   extensions: ['', '.js', '.es6']
- },
- plugins: [
-   new ExtractTextPlugin("styles.css")
- ]
+    loaders: [
+      {
+        test: [/\.js$/, /\.es6$/],
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015', 'stage-1'] 
+        }
+      },
+      {
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract('css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['', '.js', '.es6']
+  },
+  plugins: [
+    new ExtractTextPlugin("styles.css")
+  ]
 }

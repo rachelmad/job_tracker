@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Kanban from "./kanban/Kanban";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -11,10 +12,12 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div>
-        <p>Dashboard</p>
-        <Kanban />
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <p>Dashboard</p>
+          <Kanban />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
