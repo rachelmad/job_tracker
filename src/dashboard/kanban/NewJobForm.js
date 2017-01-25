@@ -26,23 +26,27 @@ export default class NewJobForm extends React.Component {
 
     this.state = {
       dateReceived: null,
+      dateReturned: null,
       reporter: null,
       rush: false,
       fileName: "",
       pages: 0,
       status: "To-Do",
-      notes: ""
+      notes: "",
+      invoice: ""
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addJob = this.addJob.bind(this);
     this.dateReceivedChanged = this.dateReceivedChanged.bind(this);
+    this.dateReturnedChanged = this.dateReturnedChanged.bind(this);
     this.reporterChanged = this.reporterChanged.bind(this);
     this.rushChanged = this.rushChanged.bind(this);
     this.fileNameChanged = this.fileNameChanged.bind(this);
     this.pagesChanged = this.pagesChanged.bind(this);
     this.statusChanged = this.statusChanged.bind(this);
     this.notesChanged = this.notesChanged.bind(this);
+    this.invoiceChanged = this.invoiceChanged.bind(this);
   }
 
   handleSubmit() {
@@ -53,8 +57,8 @@ export default class NewJobForm extends React.Component {
       fileName: this.state.fileName,
       pages: this.state.pages,
       rush: this.state.rush,
-      dateReturned: form.dateReturned.value,
-      invoice: form.invoice.value,
+      dateReturned: this.state.dateReturned,
+      invoice: this.state.invoice,
       datePaid: form.datePaid.value,
       value: form.value.value,
       status: this.state.status,
@@ -65,6 +69,12 @@ export default class NewJobForm extends React.Component {
   dateReceivedChanged(event, date) {
     this.setState({
       dateReceived: date
+    })
+  }
+
+  dateReturnedChanged(event, date) {
+    this.setState({
+      dateReturned: date
     })
   }
 
@@ -104,6 +114,12 @@ export default class NewJobForm extends React.Component {
     })
   }
 
+  invoiceChanged(event) {
+    this.setState({
+      invoice: event.target.value
+    })
+  }
+
   addJob(job) {
     $.ajax({
       type: 'POST',
@@ -120,6 +136,26 @@ export default class NewJobForm extends React.Component {
   }
 
   render() {
+    let forInvoiceInput = null;
+    if (this.state.status === "For-Invoice" || this.state.status === "Done") {
+      forInvoiceInput = <div>
+        <DatePicker 
+            hintText="Date Returned" 
+            mode="landscape" 
+            value={this.state.dateReturned} 
+            onChange={this.dateReturnedChanged} />
+      </div>
+    }
+
+    let doneInput = null;
+    if (this.state.status === "Done") {
+      doneInput = <div>
+        <TextField
+            floatingLabelText="Invoice No." 
+            onChange={this.invoiceChanged} />
+      </div>
+    }
+
     return (
       <div>
         <form name="newJob">
@@ -155,11 +191,8 @@ export default class NewJobForm extends React.Component {
             multiLine={true}
             rows={1} 
             rowsMax={4} />
-          <input type="datetime-local" name="dateReturned" placeholder="Date Returned" />
-          <input type="text" name="invoice" placeholder="Invoice No." />
-          <input type="date" name="datePaid" placeholder="Date Paid" />
-          <input type="number" name="value" placeholder="Value" step="0.01"/>
-          <input type="text" name="notes" placeholder="Notes" />
+          {forInvoiceInput}
+          {doneInput}
           <RaisedButton label="Add Job" primary={true} className={styles.addMargin} onClick={this.handleSubmit}/>
           <RaisedButton label="Cancel" primary={true} className={styles.addMargin} onClick={this.props.onCancel}/>
         </form>
