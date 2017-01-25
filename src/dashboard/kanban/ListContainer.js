@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { DropTarget } from 'react-dnd';
+import Paper from 'material-ui/Paper';
 
 import styles from "../Dashboard.css";
 import ListItem from "./ListItem";
@@ -13,6 +14,13 @@ const containerTarget = {
     }
     moveJob(job, props.refresh);
   }
+}
+
+const containerStyle = {
+  backgroundColor: "#E2E4E6",
+  width: "275px",
+  padding: "8px",
+  margin: "8px",
 }
 
 function collect(connect, monitor) {
@@ -76,8 +84,10 @@ class ListContainer extends Component {
       return <ListItem key={job._id} job={job} />
     })
     return this.connectDropTarget(
-      <div className={styles.listContainer}>
-        {items}
+      <div>
+        <Paper style={containerStyle} zDepth={1}>
+          {items}
+        </Paper>
       </div>
     );
   }

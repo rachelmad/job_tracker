@@ -1,3 +1,6 @@
+import RaisedButton from 'material-ui/RaisedButton';
+import styles from "../Dashboard.css";
+
 export default class NewReporterForm extends React.Component {
   constructor(props) {
     super(props);
@@ -46,8 +49,8 @@ export default class NewReporterForm extends React.Component {
             <input type="radio" name="payment" value="Other" />Other<br />
           </fieldset>
           <input type="text" name="notes" placeholder="Notes" />
-          <button type="button" onClick={this.handleSubmit} >Add Reporter</button>
-          <button type="button" onClick={this.props.onCancel} >Cancel</button>
+          <RaisedButton label="Add Reporter" primary={true} className={styles.addMargin} onClick={this.handleSubmit}/>
+          <RaisedButton label="Cancel" primary={true} className={styles.addMargin} onClick={this.props.onCancel}/>
         </form>
       </div>
     );

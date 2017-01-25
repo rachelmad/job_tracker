@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { DragSource } from 'react-dnd';
+import { Card, CardHeader, CardText} from 'material-ui/Card';
 
 import { DragConstants } from '../../app/DragConstants';
 import styles from "../Dashboard.css";
@@ -68,12 +69,19 @@ class ListItem extends Component {
 
   render() {
     return this.connectDragSource(
-      <div className={styles.listItem}>
-        <p>
-          {this.state.reporter} {this.state.value} <br />
-          {this.state.fileName} {this.state.pages} <br />
-          {this.state.notes}
-        </p>
+      <div className={styles.addMargin} >
+        <Card>
+          <CardHeader
+            title={this.state.reporter}
+            subtitle={this.state.fileName}
+            actAsExpander={true}
+            showExpandableButton={true} />
+          <CardText expandable={true}>
+            Value: {this.state.value} <br />
+            Pages: {this.state.pages} <br />
+            {this.state.notes}
+          </CardText>
+        </Card>
       </div>
     );
   }

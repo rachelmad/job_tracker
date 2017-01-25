@@ -2,11 +2,18 @@ import { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 import ListContainer from "./ListContainer";
 import styles from "../Dashboard.css";
 import NewJobForm from "./NewJobForm";
 import NewReporterForm from "./NewReporterForm";
+
+const kanbanStyle = {
+  backgroundColor: "#C5C7C9",
+  display: "flex",
+  flexDirection: "column"
+}
 
 class Kanban extends Component {
   constructor(props) {
@@ -93,8 +100,8 @@ class Kanban extends Component {
     let buttonArea = null;
     if (!this.state.showJobForm && !this.state.showReporterForm) {
       buttonArea = <div>
-        <button type="button" onClick={this.toggleJobArea} >New Job</button>
-        <button type="button" onClick={this.toggleReporterArea} >New Reporter</button>
+        <RaisedButton label="New Job" primary={true} className={styles.addMargin} onClick={this.toggleJobArea}/>
+        <RaisedButton label="New Reporter" primary={true} className={styles.addMargin} onClick={this.toggleReporterArea}/>
       </div>
     } 
 
@@ -110,15 +117,19 @@ class Kanban extends Component {
 
     return (
       <div>
-        { buttonArea }
-        { reporterFormArea }
-        { jobFormArea }
-        <div className={styles.kanban}>
-          <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
-          <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
-          <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
-          <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
-        </div>
+        <Paper style={kanbanStyle} zDepth={2}>
+          <div className={styles.flex}>
+            { buttonArea }
+            { reporterFormArea }
+            { jobFormArea }
+          </div>
+          <div className={styles.flex}>
+            <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
+            <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
+            <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
+            <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
+          </div>
+        </Paper>
       </div>
     );
   }
