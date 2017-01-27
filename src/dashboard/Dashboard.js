@@ -11,9 +11,10 @@ export default class Dashboard extends Component {
 
 	render() {
 		return (
-			<div>
-				<p>Dashboard</p>
-				<Kanban />
+			<div className="mdl-grid">
+        <div className="mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col">
+          <Kanban />
+        </div>
 			</div>
 		);
 	}

@@ -68,12 +68,14 @@ class ListItem extends Component {
 
   render() {
     return this.connectDragSource(
-      <div className={styles.listItem}>
-        <p>
-          {this.state.reporter} {this.state.value} <br />
-          {this.state.fileName} {this.state.pages} <br />
-          {this.state.notes}
-        </p>
+      <div className={["mdl-card", styles.listItem].join(' ')}>
+        <div className="mdl-card__supporting-text">
+          <p>
+            {this.state.reporter} {this.state.value} <br />
+            {this.state.fileName} {this.state.pages} <br />
+            {this.state.notes}
+          </p>
+        </div>
       </div>
     );
   }

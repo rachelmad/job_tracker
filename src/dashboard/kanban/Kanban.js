@@ -46,7 +46,7 @@ class Kanban extends Component {
 
   render() {
     return (
-      <div className={styles.kanban}>
+      <div className={[styles.kanban, "mdl-grid"].join(' ')}>
         <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
         <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
         <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />

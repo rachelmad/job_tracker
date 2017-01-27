@@ -5,11 +5,11 @@
 
 .listContainer {
 	background-color: #E2E4E6;
-	width: 275px;
 	padding: 8px;
-	margin: 8px;
 }
 
 .listItem {
-	background-color: white;
+	width: initial !important;
+	min-height: initial !important;
+	margin: 8px 0;
 }
