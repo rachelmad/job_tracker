@@ -77,7 +77,7 @@ class ListContainer extends Component {
       return <ListItem key={job._id} job={job} />
     })
     return this.connectDropTarget(
-      <div className={[styles.listContainer, "mdl-cell--3-col-desktop", "mdl-cell--2-col-tablet", "mdl-cell--2-col-phone"].join(' ')}>
+      <div className={[styles.listContainer, styles.addPadding, styles.secondLevelBackground, "mdl-cell--3-col-desktop", "mdl-cell--2-col-tablet", "mdl-cell--2-col-phone"].join(' ')}>
         <span>{ this.state.id }</span>
         {items}
       </div>

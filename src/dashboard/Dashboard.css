@@ -1,15 +1,42 @@
 .kanban {
-	background-color: #C5C7C9;
-	display: flex;
+  background-color: #C5C7C9;
 }
 
 .listContainer {
-	background-color: #E2E4E6;
-	padding: 8px;
+  padding: 4px;
+  margin: 4px !important;
 }
 
 .listItem {
-	width: initial !important;
-	min-height: initial !important;
-	margin: 8px 0;
+  width: initial !important;
+  min-height: initial !important;
+  margin: 8px 0;
+}
+
+.flexEnd {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.addMargin {
+  margin: 4px !important;
+}
+
+.secondLevelBackground {
+  background-color: #E2E4E6;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
 }

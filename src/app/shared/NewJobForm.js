@@ -1,3 +1,5 @@
+import styles from "../../dashboard/Dashboard.css";
+
 export default class NewJobForm extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +45,7 @@ export default class NewJobForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="mdl-grid">
         <form name="newJob">
           <input type="datetime-local" name="dateReceived" placeholder="Date Received" />
           <input type="text" name="reporter" placeholder="Court Reporter" />
@@ -61,8 +63,10 @@ export default class NewJobForm extends React.Component {
             <input type="radio" name="status" value="Done" />Done<br />
           </fieldset>
           <input type="text" name="notes" placeholder="Notes" />
-          <button type="button" onClick={this.handleSubmit}>Add Job</button>
-          <button type="button" onClick={this.props.onCancel}>Cancel</button>
+          <button className={[styles.addMargin, "mdl-button", "mdl-js-button", "mdl-button--raised", "mdl-button--colored", "mdl-js-ripple-effect"].join(' ')} 
+          onClick={this.handleSubmit}>Add</button>
+          <button className={[styles.addMargin, "mdl-button", "mdl-js-button", "mdl-button--raised", "mdl-button--colored", "mdl-js-ripple-effect"].join(' ')} 
+          onClick={this.props.onCancel}>Cancel</button>
         </form>
       </div>
     );

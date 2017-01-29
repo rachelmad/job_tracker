@@ -72,40 +72,53 @@ class Kanban extends Component {
   }
 
   render() {
+    var addButtons = null; 
+    if (this.state.showJobForm || this.state.showReportForm) {
+      addButtons = null;
+    } else {
+      addButtons = <div>
+        <button className={[styles.addMargin, "mdl-button", "mdl-js-button", "mdl-button--raised", "mdl-button--colored", "mdl-js-ripple-effect"].join(' ')} 
+          onClick={this.toggleJobForm}>Add Job</button>
+        <button className={[styles.addMargin, "mdl-button", "mdl-js-button", "mdl-button--raised", "mdl-button--colored", "mdl-js-ripple-effect"].join(' ')} 
+          onClick={this.toggleReportForm}>Add Reporter</button> 
+      </div>
+    }
+
     var jobForm = null;
     if (this.state.showJobForm) {
-      jobForm = <div>
-        <NewJobForm addJobSuccess={this.addJobSuccess} onCancel={this.toggleJobForm}/>
+      jobForm = <div className={[styles.kanban, "mdl-grid"].join(' ')}>
+        <div className={styles.fullWidth}>
+          <NewJobForm addJobSuccess={this.addJobSuccess} onCancel={this.toggleJobForm}/>
+        </div>
       </div>
     } else {
-      jobForm = <div>
-        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-          onClick={this.toggleJobForm}>Add Job</button>
-      </div>
+      jobForm = null;
     }
 
     var reportForm = null;
     if (this.state.showReportForm) {
-      reportForm = <div>
-        <NewReporterForm addReporterSuccess={this.addReporterSuccess} onCancel={this.toggleReportForm} />
+      reportForm = <div className={[styles.kanban, styles.addMargin, "mdl-grid"].join(' ')}>
+        <div className={styles.fullWidth}>
+          <NewReporterForm addReporterSuccess={this.addReporterSuccess} onCancel={this.toggleReportForm} />
+        </div>
       </div>
     } else {
-      reportForm = <div>
-        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-          onClick={this.toggleReportForm}>Add Reporter</button>
-      </div>
+      reportForm = null;
     }
 
     return (
-      <div className={[styles.kanban, "mdl-grid"].join(' ')}>
-        <div>
-          { jobForm }
-          { reportForm }
+      <div>
+        { jobForm }
+        { reportForm }
+        <div className={styles.flexEnd} >
+          { addButtons }
         </div>
-        <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
-        <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
-        <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
-        <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
+        <div className={[styles.kanban, styles.addMargin, "mdl-grid"].join(' ')}>
+          <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
+          <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
+          <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
+          <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
+        </div>
       </div>
     );
   }
