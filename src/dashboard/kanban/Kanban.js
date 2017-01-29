@@ -6,14 +6,8 @@ import Paper from 'material-ui/Paper';
 
 import ListContainer from "./ListContainer";
 import styles from "../Dashboard.css";
-import NewJobForm from "./NewJobForm";
-import NewReporterForm from "./NewReporterForm";
-
-const kanbanStyle = {
-  backgroundColor: "#C5C7C9",
-  display: "flex",
-  flexDirection: "column"
-}
+import NewJobForm from "../../app/shared/NewJobForm";
+import NewReporterForm from "../../app/shared/NewReporterForm";
 
 class Kanban extends Component {
   constructor(props) {
@@ -25,18 +19,15 @@ class Kanban extends Component {
       forinvoice: [],
       done: [],
       showJobForm: false,
-      showReporterForm: false
+      showReportForm: false
     }
 
     this.getJobs = this.getJobs.bind(this);
     this.sortJobs = this.sortJobs.bind(this);
     this.filterJobs = this.filterJobs.bind(this);
-    this.toggleJobArea = this.toggleJobArea.bind(this);
-    this.toggleReporterArea = this.toggleReporterArea.bind(this);
-    this.jobAdded = this.jobAdded.bind(this);
-    this.reporterAdded = this.reporterAdded.bind(this);
-    this.closeJobForm = this.closeJobForm.bind(this);
-    this.closeReporterForm = this.closeReporterForm.bind(this);
+    this.addJobSuccess = this.addJobSuccess.bind(this);
+    this.toggleJobForm = this.toggleJobForm.bind(this);
+    this.toggleReportForm = this.toggleReportForm.bind(this);
   }
 
   componentDidMount() {
@@ -62,74 +53,74 @@ class Kanban extends Component {
     return status.toLowerCase() === value.status.toLowerCase();
   }
 
-  toggleJobArea() {
+  addJobSuccess() {
+    this.getJobs();
+  }
+
+  addReporterSuccess() {
+    console.log("Added reporter");
+  }
+
+  toggleJobForm() {
     this.setState({
       showJobForm: !this.state.showJobForm
     })
   }
 
-  toggleReporterArea() {
+  toggleReportForm() {
     this.setState({
-      showReporterForm: !this.state.showReporterForm
-    })
-  }
-
-  jobAdded() {
-    this.getJobs();
-    this.closeJobForm();
-  }
-
-  reporterAdded() {
-    console.log("Reporter added");
-    this.closeReporterForm();
-  }
-
-  closeJobForm() {
-    this.setState({
-      showJobForm: false
-    })
-  }
-
-  closeReporterForm() {
-    this.setState({
-      showReporterForm: false
+      showReportForm: !this.state.showReportForm
     })
   }
 
   render() {
-    let buttonArea = null;
-    if (!this.state.showJobForm && !this.state.showReporterForm) {
-      buttonArea = <div>
-        <RaisedButton label="New Job" primary={true} className={styles.addMargin} onClick={this.toggleJobArea}/>
-        <RaisedButton label="New Reporter" primary={true} className={styles.addMargin} onClick={this.toggleReporterArea}/>
+    var addButtons = null; 
+    if (this.state.showJobForm || this.state.showReportForm) {
+      addButtons = null;
+    } else {
+      addButtons = <div>
+        <button className={[styles.addMargin, "mdl-button", "mdl-js-button", "mdl-button--raised", "mdl-button--colored", "mdl-js-ripple-effect"].join(' ')} 
+          onClick={this.toggleJobForm}>Add Job</button>
+        <button className={[styles.addMargin, "mdl-button", "mdl-js-button", "mdl-button--raised", "mdl-button--colored", "mdl-js-ripple-effect"].join(' ')} 
+          onClick={this.toggleReportForm}>Add Reporter</button> 
       </div>
-    } 
-
-    let jobFormArea = null;
-    if (this.state.showJobForm) {
-      jobFormArea = <NewJobForm onSuccess={this.jobAdded} onCancel={this.closeJobForm}/>
     }
 
-    let reporterFormArea = null;
-    if (this.state.showReporterForm) {
-      reporterFormArea = <NewReporterForm onSuccess={this.reporterAdded} onCancel={this.closeReporterForm}/>
+    var jobForm = null;
+    if (this.state.showJobForm) {
+      jobForm = <div className={[styles.kanban, "mdl-grid"].join(' ')}>
+        <div className={styles.fullWidth}>
+          <NewJobForm addJobSuccess={this.addJobSuccess} onCancel={this.toggleJobForm}/>
+        </div>
+      </div>
+    } else {
+      jobForm = null;
+    }
+
+    var reportForm = null;
+    if (this.state.showReportForm) {
+      reportForm = <div className={[styles.kanban, styles.addMargin, "mdl-grid"].join(' ')}>
+        <div className={styles.fullWidth}>
+          <NewReporterForm addReporterSuccess={this.addReporterSuccess} onCancel={this.toggleReportForm} />
+        </div>
+      </div>
+    } else {
+      reportForm = null;
     }
 
     return (
       <div>
-        <Paper style={kanbanStyle} zDepth={2}>
-          <div className={styles.flex}>
-            { buttonArea }
-            { reporterFormArea }
-            { jobFormArea }
-          </div>
-          <div className={styles.flex}>
-            <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
-            <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
-            <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
-            <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
-          </div>
-        </Paper>
+        { jobForm }
+        { reportForm }
+        <div className={styles.flexEnd} >
+          { addButtons }
+        </div>
+        <div className={[styles.kanban, styles.addMargin, "mdl-grid"].join(' ')}>
+          <ListContainer id="To-Do" jobs={this.state.todo} refresh={this.getJobs} />
+          <ListContainer id="Doing" jobs={this.state.doing} refresh={this.getJobs} />
+          <ListContainer id="For-Invoice" jobs={this.state.forinvoice} refresh={this.getJobs} />
+          <ListContainer id="Done" jobs={this.state.done} refresh={this.getJobs} />
+        </div>
       </div>
     );
   }

@@ -69,19 +69,14 @@ class ListItem extends Component {
 
   render() {
     return this.connectDragSource(
-      <div className={styles.addMargin} >
-        <Card>
-          <CardHeader
-            title={this.state.reporter}
-            subtitle={this.state.fileName}
-            actAsExpander={true}
-            showExpandableButton={true} />
-          <CardText expandable={true}>
-            Value: {this.state.value} <br />
-            Pages: {this.state.pages} <br />
+      <div className={["mdl-card", styles.listItem].join(' ')}>
+        <div className="mdl-card__supporting-text">
+          <p>
+            {this.state.reporter} {this.state.value} <br />
+            {this.state.fileName} {this.state.pages} <br />
             {this.state.notes}
-          </CardText>
-        </Card>
+          </p>
+        </div>
       </div>
     );
   }

@@ -10,14 +10,13 @@ export default class Dashboard extends Component {
     }
   }
 
-  render() {
-    return (
-      <MuiThemeProvider>
-        <div>
-          <p>Dashboard</p>
+	render() {
+		return (
+			<div className="mdl-grid">
+        <div className="mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col">
           <Kanban />
         </div>
-      </MuiThemeProvider>
-    );
-  }
+			</div>
+		);
+	}
 }
